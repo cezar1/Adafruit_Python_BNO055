@@ -361,7 +361,7 @@ class BNO055(object):
         # Enter operation mode to read sensor data.
         self.set_mode(self._mode)
 
-    def begin(self, mode=OPERATION_MODE_NDOF):
+    def begin(self, mode=OPERATION_MODE_IMUPLUS):
         """Initialize the BNO055 sensor.  Must be called once before any other
         BNO055 library functions.  Will return True if the BNO055 was
         successfully initialized, and False otherwise.
@@ -381,6 +381,7 @@ class BNO055(object):
         # Make sure we're in config mode and on page 0.
         self._config_mode()
         self._write_byte(BNO055_PAGE_ID_ADDR, 0)
+
         # Check the chip ID
         bno_id = self._read_byte(BNO055_CHIP_ID_ADDR)
         logger.debug('Read chip ID: 0x{0:02X}'.format(bno_id))
